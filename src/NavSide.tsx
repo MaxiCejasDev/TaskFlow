@@ -1,6 +1,7 @@
 
 
 export default function NavSide(){
+    
     return(
         <nav className="bg-white-secondary h-full w-full col-start-1 col-end-2">
             <div>

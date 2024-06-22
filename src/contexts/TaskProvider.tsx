@@ -1,57 +1,59 @@
-import { createContext, useContext, useReducer, useState } from "react"
+import {  createContext, useContext, useState,} from "react"
 
 
 interface Task {
     id: number,
-    title: string
+    text: string
 }
+// interface TaskTitle {
+//     titleId: number,
+//     title: string,
+//     tasks: Task[]
+// }
+
 interface TaskContextType {
     tasks: Task[];
-    handleAddTask: ()=> void;
-    setInputValue: (value:string) => void;
-    setInputEditValue : (value:string) => void;
-    handleDeleteTask : (taskId : number)=> void;
+    handleAddTask: (taskText:string)=>void;
+    handleEditTask: (taskId:number, taskTextEdit : string)=>void;
+    handleDeleteTask: (taskId:number)=>void;
 }
+
 const TaskContext = createContext<TaskContextType | undefined>(undefined)
 
 export const useTaskContext = ()=>{
     return useContext(TaskContext)
 }
-const reducer = (state: Task[],action)=>{
-    switch(action.type){
-        case 'ADD_TASK':{
-            return [...state,{id:action.id , title:action.payload}]
-        }
-        case 'DELETE_TASK':{
-            return state.filter(task=> task.id !== action.id)
-        }
-    }
-}
 
-
-export const TaskProvider = ({ children })=>{
-    const initialState:Task[] = []
-    const [tasks, dispatch] = useReducer(reducer,initialState)
-    const [inputValue, setInputValue] = useState('')
-    const [inputEditValue, setInputEditValue] = useState('')
-    const handleAddTask = ()=>{
-        dispatch({
-            type: 'ADD_TASK',
+export const TaskProvider = ({ children }: {children: React.ReactNode})=>{
+    const [tasks, setTasks] = useState<Task[]>([])
+    const handleAddTask = (taskText : string)=>{
+        const newTask:Task = {
             id: tasks.length + 1,
-            payload: inputValue
-        })
-        setInputValue('')
+            text: taskText
+        }
+        setTasks([...tasks,newTask])
     }
-    const handleDeleteTask = (taskId : number)=>{
-        dispatch({
-            type: 'DELETE_TASK',
-            id: taskId
-        })
+    const handleEditTask = (taskId : number, taskTextEdit : string )=>{
+        setTasks(tasks.map(task=>
+            task.id === taskId? {...task,text: taskTextEdit}:task
+        ))
     }
-    console.log(inputValue)
+
+    const handleDeleteTask = (taskId:number)=>{
+        const updateTask = tasks.filter((task)=>{
+            return task.id !== taskId
+        })
+        setTasks(updateTask)
+    }
     console.log(tasks)
+    const contextValue: TaskContextType = {
+        tasks,
+        handleAddTask,
+        handleEditTask,
+        handleDeleteTask,
+    };
     return(
-        <TaskContext.Provider value={{tasks,handleAddTask, setInputValue, setInputEditValue,handleDeleteTask }}>
+        <TaskContext.Provider value={contextValue} >
             {children}
         </TaskContext.Provider>
     )
