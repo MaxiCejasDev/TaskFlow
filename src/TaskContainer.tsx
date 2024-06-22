@@ -1,17 +1,13 @@
 import { useState } from "react";
 import TasksBody from "./TasksBody/TasksBody";
-import { useTaskContext } from "./contexts/TaskProvider";
+
 
 
 
 
 export default function TaskContainer (){
-    const {handleAddTask} = useTaskContext()
-    const [inputValue, setInputValue] = useState('')
-    const handleSetTask = ()=>{
-        handleAddTask(inputValue)
-        setInputValue('')
-    }
+    
+    
     return(
         <div className="w-full h-full col-start-2 col-end-3 px-4">
             <div className="w-full">
@@ -28,8 +24,8 @@ export default function TaskContainer (){
             </div>
             <div className="w-full bg-green-500">  
                 <div className="flex pt-2 gap-x-4 w-full h-full">
-                    <input onChange={(e)=> setInputValue(e.target.value)} className="w-3/4 border-2 border-black" placeholder="Escribir tarea..." type="text" />
-                    <button onClick={handleSetTask} className="bg-white-light w-[32px] h-[32px] rounded-full">
+                    <input className="w-3/4 border-2 border-black" placeholder="Escribir tarea..." type="text" />
+                    <button className="bg-white-light w-[32px] h-[32px] rounded-full">
                         <img className="h-[26px] w-[26px]" src="/images/arrow.svg" alt="" />
                     </button>
                 </div>
