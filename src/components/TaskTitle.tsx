@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 interface Task{
   id: number,
@@ -14,11 +15,11 @@ interface TitleContent {
 
 interface TaskTitle{
   id: number;
-  titleContent: TitleContent[];
+  titleTasks: TitleContent[];
 
 }
 
-export default function TaskTitle({id,titleContent}: TaskTitle) {
+export default function TaskTitle({id,titleTasks}: TaskTitle) {
   const [inputTitle, setInputTitle] = useState('')
   const [addTitle, setAddTitle] =  useState(false)
 
@@ -27,17 +28,17 @@ export default function TaskTitle({id,titleContent}: TaskTitle) {
     setInputTitle(e.target.value)
   }
   const handleAddTitle = (taskId:number)=>{
-    titleContent.map((task)=>{
+    titleTasks.map((task)=>{
       if(task.id === taskId){
         task.title = inputTitle
         setAddTitle(true)
       }
     })
   }
-  console.log(titleContent)
+ 
   return (
     
-      <div className="bg-white-light border-[1px] border-blue-light h-[60px] w-full rounded-[12px] flex px-2 items-center justify-between">
+      <NavLink to={`/${id}`} className="bg-white-light border-[1px] border-blue-light h-[60px] w-full rounded-[12px] flex px-2 items-center justify-between">
         <div className="">
           <div className="h-[36px] w-[36px] bg-blue-light rounded-full flex justify-center items-center">
             <img
@@ -68,7 +69,7 @@ export default function TaskTitle({id,titleContent}: TaskTitle) {
             />
           </button>
         </div>
-      </div>
+      </NavLink>
     
   );
 }
