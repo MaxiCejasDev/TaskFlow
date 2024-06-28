@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import TasksBody from "./TasksBody/TasksBody";
 import { useTaskContext } from "./contexts/TaskProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 
 interface Task {
@@ -10,12 +10,63 @@ interface Task {
     text: string
 }
 
-
+const reducer = (state: Task[],action)=>{
+    switch(action.type){
+        case 'ADD_TASK':{
+            return [...state,{
+                id: state.length + 1,
+                text: action.payload
+            }]
+        }
+        case 'EDIT_TASK':{
+            const taskMatch = state.map((task)=>{
+                if(task.id === action.id){
+                    return {...task, text: action.payload}
+                }
+                return task
+            })
+            return taskMatch
+        }
+        case 'DELETE_TASK':{
+            const taskUpdate = state.filter((task)=>{
+                return task.id !== action.id
+            })
+            return state = taskUpdate
+        }
+    }
+}
 
 export default function TaskContainer (){
+    const initialState : Task[] = []
+    const [inputValue, setInputValue] = useState('')
     const { taskId } = useParams()
     const {titleTasks} = useTaskContext()
     const [taskContent, setTaskContent] = useState([])
+
+
+    const [tasksSection, dispatch] = useReducer(reducer,initialState)
+
+    const handleAddTask = (text:string)=>{
+        dispatch({
+            type: 'ADD_TASK',
+            payload: text
+        })
+        setInputValue('')
+    }
+    const handleEditTask = (taskId : number, newTask : string)=>{
+        dispatch({
+            type: 'EDIT_TASK',
+            id: taskId,
+            payload: newTask
+        })
+    }
+
+    const handleDeleteTask = (taskId)=>{
+        dispatch({
+            type: 'DELETE_TASK',
+            id: taskId
+        })
+    }
 
     const handleMatchTask = (id)=>{
         const taskMatch = titleTasks.filter((item)=>{
@@ -24,10 +75,13 @@ export default function TaskContainer (){
         setTaskContent(taskMatch)
     }
 
+    const handleInputValue = (e)=>{
+        setInputValue(e.target.value)
+    }
     useEffect(()=>{
             handleMatchTask(taskId)
     },[taskId])
-    
+  
     return(
         <>
         {taskContent.map((item)=>(
@@ -46,13 +100,13 @@ export default function TaskContainer (){
                      </div>
                      <div className="w-full bg-green-500">  
                          <div className="flex pt-2 gap-x-4 w-full h-full">
-                             <input className="w-3/4 border-2 border-black" placeholder="Escribir tarea..." type="text" />
-                             <button className="bg-white-light w-[32px] h-[32px] rounded-full">
+                             <input onChange={handleInputValue} className="w-3/4 border-2 border-black" placeholder="Escribir tarea..." type="text" />
+                             <button onClick={()=> handleAddTask(inputValue)} className="bg-white-light w-[32px] h-[32px] rounded-full">
                                  <img className="h-[26px] w-[26px]" src="/images/arrow.svg" alt="" />
                              </button>
                          </div>
                      </div>
-                     <TasksBody/>
+                     <TasksBody tasks={tasksSection} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask}/>
                  </div>
         ))}
         </>
