@@ -41,8 +41,8 @@ export default function TaskProvider({children}:{children:React.ReactNode}){
    
     const contextValue = {
         titleTasks,
-        handleTitleTasks
-
+        handleTitleTasks,
+        setTitleTasks
     }
     return(
        <TaskContext.Provider value={contextValue}>
