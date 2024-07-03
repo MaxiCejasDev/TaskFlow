@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useTaskContext } from "../contexts/TaskProvider";
 
 interface Task{
   id: number,
@@ -20,6 +21,7 @@ interface TaskTitle{
 }
 
 export default function TaskTitle({id,titleTasks}: TaskTitle) {
+  const {setTitleTasks} = useTaskContext()
   const [inputTitle, setInputTitle] = useState('')
   const [addTitle, setAddTitle] =  useState(false)
 
@@ -28,12 +30,14 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
     setInputTitle(e.target.value)
   }
   const handleAddTitle = (taskId:number)=>{
-    titleTasks.map((task)=>{
-      if(task.id === taskId){
-        task.title = inputTitle
-        setAddTitle(true)
+    const updatedTitleTasks = titleTasks.map(task => {
+      if (task.id === taskId) {
+          return { ...task, title: inputTitle };
       }
-    })
+      return task;
+  })
+  setTitleTasks(updatedTitleTasks)
+  setAddTitle(true);
   }
  
   return (
