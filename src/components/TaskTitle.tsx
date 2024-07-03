@@ -25,7 +25,6 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
   const [inputTitle, setInputTitle] = useState('')
   const [addTitle, setAddTitle] =  useState(false)
 
-
   const handleInputTitle = (e)=>{
     setInputTitle(e.target.value)
   }
@@ -68,8 +67,8 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
           <button>
             <img
               className="h-[24px] w-[24px]"
-              src="/images/pencil-title.svg"
-              alt="Pencil title icon"
+              src="/images/point-menu.svg"
+              alt="Three point menu"
             />
           </button>
         </div>

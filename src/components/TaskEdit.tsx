@@ -3,12 +3,12 @@ import { useState } from "react";
 interface Props{
     openTaskEditor: boolean;
     handleOpenTaskEditor: ()=> void;
-
-    taskId: number
+    taskId: number;
+    handleEditTask : (id: number, newText: string)=> void;
 }
 
 
-export default function TaskEdit ({openTaskEditor, handleOpenTaskEditor,taskId}: Props){
+export default function TaskEdit ({openTaskEditor, handleOpenTaskEditor,taskId,handleEditTask}: Props){
     const [inputNewValue, setInputNewValue] = useState('')
     const handleNewText = (e)=>{
         setInputNewValue(e.target.value)
@@ -20,7 +20,7 @@ export default function TaskEdit ({openTaskEditor, handleOpenTaskEditor,taskId}:
                 <button onClick={handleOpenTaskEditor} className="absolute top-[5px] right-[5px]"><img src="/images/close.svg" alt="Close icon" /></button>
                 <input onChange={handleNewText} className="border-2 border-blue-light" placeholder="Ingresar cambio" type="text" />
                 <button onClick={()=>{
-                
+                    handleEditTask(taskId, inputNewValue)
                     setInputNewValue('') 
                     handleOpenTaskEditor()
                 }

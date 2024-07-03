@@ -31,7 +31,7 @@ export default function TaskContainer (){
         })
     }
 
-    const handleAddsTask = (text: string)=>{
+    const handleAddTask = (text: string)=>{
         setTasks([...tasks,{
             id: tasks.length + 1,
             text: text
@@ -86,7 +86,8 @@ export default function TaskContainer (){
     useEffect(()=>{
         handleMatchTitle(taskId)
     },[titleTasks])
-    console.log(titleTasks)
+
+    console.log(tasks)
     return(
         <>
             
@@ -106,12 +107,12 @@ export default function TaskContainer (){
                 <div className="w-full bg-green-500">  
                     <div className="flex pt-2 gap-x-4 w-full h-full">
                         <input onChange={handleInputValue} className="w-3/4 border-2 border-black" placeholder="Escribir tarea..." type="text" />
-                        <button onClick={()=> handleAddsTask(inputValue)}  className="bg-white-light w-[32px] h-[32px] rounded-full">
+                        <button onClick={()=> handleAddTask(inputValue)}  className="bg-white-light w-[32px] h-[32px] rounded-full">
                             <img className="h-[26px] w-[26px]" src="/images/arrow.svg" alt="" />
                         </button>
                     </div>
                 </div>
-                {/* <TasksBody/> */}
+                <TasksBody tasks={tasks} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask}/>
             </div>
   
                      
