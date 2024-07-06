@@ -1,11 +1,17 @@
 interface Props {
+    id: number;
     handleOpenTitleModal: ()=> void;
-    handleAddTitle: ()=> void
+    handleAddTitle: ()=> void;
+    handleDeleteTitle: (value:number)=> void;
 }
-export default function TaskTitleModal({handleOpenTitleModal, handleAddTitle}:Props) {
+
+export default function TaskTitleModal({id,handleOpenTitleModal, handleAddTitle,handleDeleteTitle}:Props) {
   return (
     <div className="w-[150px] h-[100px] absolute top-[-20px] right-0 bg-white z-10 flex flex-col shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-[12px] overflow-hidden">
-      <li onClick={handleOpenTitleModal} className="list-none hover:bg-white-tertiary h-[50%] flex items-center font-regular text-[16px] text-[#555555]">
+      <li onClick={()=>{
+        handleDeleteTitle(id)
+        handleOpenTitleModal()
+      }} className="list-none hover:bg-white-tertiary h-[50%] flex items-center font-regular text-[16px] text-[#555555]">
         <button className="flex items-center ml-4 gap-x-2">
             <img className="h-[16px] w-[16px]" src="./images/trash-icon.svg" alt="Trash icon" />
             Eliminar</button>

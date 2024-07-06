@@ -37,6 +37,7 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
       }
       return task;
   })
+
   setTitleTasks(updatedTitleTasks)
   setAddTitle(true);
   }
@@ -46,6 +47,12 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
  const handleAddTitle = ()=>{
   setAddTitle(false)
  }
+ const handleDeleteTitle = (id: number)=>{
+  const updateTitle = titleTasks.filter((item)=>{
+    return item.id !== id
+  })
+  setTitleTasks(updateTitle)
+}
   return (
     
       <NavLink to={`/${id}`} className="bg-white-light relative border-[1px] border-blue-light h-[60px] w-full rounded-[12px] flex px-2 items-center justify-between">
@@ -79,7 +86,7 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
             />
           </button>
         </div>
-        {openTitleModal && <TaskTitleModal handleOpenTitleModal={handleOpenTitleModal} handleAddTitle={handleAddTitle}/>}
+        {openTitleModal && <TaskTitleModal id={id} handleOpenTitleModal={handleOpenTitleModal} handleAddTitle={handleAddTitle} handleDeleteTitle={handleDeleteTitle}/>}
       </NavLink>
     
   );
