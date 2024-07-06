@@ -41,6 +41,7 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
   setTitleTasks(updatedTitleTasks)
   setAddTitle(true);
   }
+
  const handleOpenTitleModal = ()=>{
   setOpenTitleModal(!openTitleModal)
  }
@@ -55,17 +56,17 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
 }
   return (
     
-      <NavLink to={`/${id}`} className="bg-white-light relative border-[1px] border-blue-light h-[60px] w-full rounded-[12px] flex px-2 items-center justify-between">
+      <NavLink to={`/${id}`} className="hover:bg-white-light relative  h-[40px] w-full rounded-[12px] flex px-2 items-center justify-between">
         <div className="">
-          <div className="h-[36px] w-[36px] bg-blue-light rounded-full flex justify-center items-center">
+          <div className="h-[36px] w-[36px] rounded-full flex justify-center items-center">
             <img
-              className="h-[24px] w-[24px]"
+              className="h-[16px] w-[16px]"
               src="/images/task.svg"
               alt="Task icon"
             />
           </div>
         </div>
-        <div>{
+        <div className="font-semibold text-base text-black-bold">{
           addTitle?<p>{inputTitle}</p>:(
             <>
                         <input onChange={handleInputTitle} type="text" />

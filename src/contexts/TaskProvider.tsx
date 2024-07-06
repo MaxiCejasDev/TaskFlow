@@ -16,6 +16,7 @@ interface TaskContent {
 interface ContextType{
     titleTasks:TaskContent[];
     handleTitleTasks : ()=> void;
+   
 }
 
 const TaskContext = createContext<ContextType | undefined>(undefined)
@@ -39,10 +40,12 @@ export default function TaskProvider({children}:{children:React.ReactNode}){
         
     }
    
+   
     const contextValue = {
         titleTasks,
         handleTitleTasks,
-        setTitleTasks
+        setTitleTasks,
+       
     }
     return(
        <TaskContext.Provider value={contextValue}>

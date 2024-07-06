@@ -10,27 +10,12 @@ export default function NavSide(){
 
 
     return(
-        <nav className="bg-white-secondary h-full w-full col-start-1 col-end-2">
+        <nav className="bg-white-tertiary h-full border-white-light border-[1px] w-full col-start-1 col-end-2 px-2 pt-4 shadow-[5px_0px_10px_rgba(200,200,200,0.3)]">
             <div>
-                <div>
-                    <div className="flex gap-x-2">
-                        <div className="bg-red-500 w-[26px] h-[26px] rounded-full flex justify-center items-center">
-                            <p className="text-sm text-white text-bold">MC</p>
-                        </div>
-                        <p>Maximiliano Cejas</p>
-                    </div>
-                    <div className="flex gap-x-2">
-                        <img src="/images/house.svg" alt="House" />
-                        <p>Inicio</p>
-                    </div>
-                    <div className="flex gap-x-2">
-                        <img src="/images/config.svg" alt="House" />
-                        <p>Configuración</p>
-                    </div>
-                </div>
+
                 <div className="flex justify-between">
                     <div>
-                        <p>Mis tareas</p>
+                        <p className="font-semibold text-black-bold">Mis tareas</p>
                     </div>
                     <div>
                         <button onClick={handleTitleTasks}>

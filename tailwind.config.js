@@ -10,6 +10,9 @@ export default {
         'black-bold': '#222222',
         'white-secondary': '#FFFFFF',
         'white-tertiary': '#F0F0F0'
+      },
+      gridTemplateColumns: {
+        'app': '300px 1fr'
       }
     },
   },

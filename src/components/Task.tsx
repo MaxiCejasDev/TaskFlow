@@ -21,7 +21,7 @@ export default function Task({taskId,taskText,handleDeleteTask, handleEditTask}:
    }
    
     return(
-        <div  className="flex w-full relative bg-white-tertiary border-[1px] border-white-light items-center gap-x-4 px-2">
+        <div  className="flex w-full relative bg-white hover:bg-white-tertiary items-center gap-x-4 px-2">
             <input className="h-[20px] w-[20px]" type="checkbox" />
             <p>{taskText}</p>
             <div className="flex gap-x-1 absolute right-0 top-0">
