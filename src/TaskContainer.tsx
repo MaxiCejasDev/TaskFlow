@@ -88,7 +88,7 @@ export default function TaskContainer (){
     return(
         <>
             
-                <div className="w-full h-full col-start-2 col-end-3 px-4">
+                <div className="w-[calc(100%-300px)] pl-16 pr-64 h-full pt-8">
                 <div className="w-full">
                     <div className="flex gap-x-4 items-center pl-2 py-2">
                         <img className="h-[24px] w-[24px]" src="/images/task.svg" alt="Task title" />

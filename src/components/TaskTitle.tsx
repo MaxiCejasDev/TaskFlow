@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTaskContext } from "../contexts/TaskProvider";
 import TaskTitleModal from "./TaskTitleModal";
@@ -26,6 +26,8 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
   const [inputTitle, setInputTitle] = useState('')
   const [addTitle, setAddTitle] =  useState(false)
   const [openTitleModal, setOpenTitleModal] = useState(false)
+  const inputTitleRef = useRef()
+
 
   const handleInputTitle = (e)=>{
     setInputTitle(e.target.value)
@@ -54,6 +56,20 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
   })
   setTitleTasks(updateTitle)
 }
+useEffect(()=>{
+  const handleOutsideInputTitle = (event)=>{
+    if(inputTitleRef.current && !inputTitleRef.current.contains(event.target)){
+      setAddTitle(!addTitle)
+    }
+  }
+  if(!addTitle){
+    document.addEventListener("mousedown",handleOutsideInputTitle)
+  }
+  return ()=>{
+    document.removeEventListener("mousedown", handleOutsideInputTitle)
+  }
+},[addTitle])
+
   return (
     
       <NavLink to={`/${id}`} className="hover:bg-white-light relative  h-[40px] w-full rounded-[12px] flex px-2 items-center justify-between">
@@ -66,11 +82,16 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
             />
           </div>
         </div>
-        <div className="font-semibold text-base text-black-bold">{
+        <div className="font-semibold text-base text-black-bold relative">{
           addTitle?<p>{inputTitle}</p>:(
             <>
-                        <input onChange={handleInputTitle} type="text" />
-                        <button onClick={()=> handleTitle(id)}>Agregar</button>
+            <div ref={inputTitleRef} className="absolute z-10 top-0 left-2 w-[250px] px-2 h-[40px] bg-white-secondary flex gap-x-2 justify-center items-center rounded-[4px] shadow-[0px_5px_10px_rgba(0,0,0,.25)] ">
+              <input className="outline-white-light pl-2 bg-white outline-1 rounded-[4px] w-[200px] h-[30px]" onChange={handleInputTitle} type="text" />
+              <button onClick={()=> handleTitle(id)}>
+                <img className="h-[24px] w-[24px]" src="/images/add-rounded.svg" alt="Add rounded icon" />
+              </button>
+            </div>
+                        
             </>
 
           )
@@ -87,7 +108,7 @@ export default function TaskTitle({id,titleTasks}: TaskTitle) {
             />
           </button>
         </div>
-        {openTitleModal && <TaskTitleModal id={id} handleOpenTitleModal={handleOpenTitleModal} handleAddTitle={handleAddTitle} handleDeleteTitle={handleDeleteTitle}/>}
+        {openTitleModal && <TaskTitleModal id={id} openTitleModal={openTitleModal} handleOpenTitleModal={handleOpenTitleModal} handleAddTitle={handleAddTitle} handleDeleteTitle={handleDeleteTitle}/>}
       </NavLink>
     
   );

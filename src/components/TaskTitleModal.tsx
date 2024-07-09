@@ -1,13 +1,31 @@
+import { useEffect, useRef, useState } from "react";
+
 interface Props {
     id: number;
+    openTitleModal: boolean;
     handleOpenTitleModal: ()=> void;
     handleAddTitle: ()=> void;
     handleDeleteTitle: (value:number)=> void;
 }
 
-export default function TaskTitleModal({id,handleOpenTitleModal, handleAddTitle,handleDeleteTitle}:Props) {
+export default function TaskTitleModal({id,openTitleModal,handleOpenTitleModal, handleAddTitle,handleDeleteTitle}:Props) {
+  const modalRef = useRef()
+  useEffect(()=>{
+    const handleClickOutside = (event)=>{
+      if(modalRef.current && !modalRef.current.contains(event.target)){
+          handleOpenTitleModal()
+      } 
+      
+    }
+    if(openTitleModal){
+      document.addEventListener("mousedown",handleClickOutside)
+    }
+    return ()=>{
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  },[openTitleModal])
   return (
-    <div className="w-[150px] h-[100px] absolute top-[-20px] right-0 bg-white z-10 flex flex-col shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-[12px] overflow-hidden">
+    <div ref={modalRef} className="w-[150px] h-[100px] absolute top-[-20px] right-0 bg-white z-10 flex flex-col shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-[12px] overflow-hidden">
       <li onClick={()=>{
         handleDeleteTitle(id)
         handleOpenTitleModal()

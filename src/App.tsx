@@ -7,7 +7,7 @@ import NotTasks from './components/NotTasks'
 function App() {
 
   return (
-      <div className="h-screen w-full bg-white  grid grid-cols-app overflow-hidden">
+      <div className="h-screen w-full bg-white  flex overflow-hidden">
 
           <NavSide/>
           <Routes>
