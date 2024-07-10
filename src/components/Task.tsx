@@ -16,14 +16,19 @@ interface Props {
 
 export default function Task({taskId,taskText,handleDeleteTask, handleEditTask}:Props){
    const [openTaskEditor , setOpenTaskEditor ] = useState(false)
+   const [isCompleted, setIsCompleted] = useState(false)
    const handleOpenTaskEditor = ()=>{
     setOpenTaskEditor(!openTaskEditor)
    }
-   
+   const handleCompletedTask = ()=>{
+    setIsCompleted(!isCompleted)
+   }
     return(
         <div  className="flex w-full relative bg-white hover:bg-white-tertiary items-center gap-x-4 px-2">
-            <input className="h-[20px] w-[20px]" type="checkbox" />
-            <p>{taskText}</p>
+            <input onClick={()=> {
+                handleCompletedTask()
+            }} className="h-[20px] w-[20px]" type="checkbox" />
+            <p className={`${isCompleted?'text-[#555555] line-through':''}`}>{taskText}</p>
             <div className="flex gap-x-1 absolute right-0 top-0">
                 <button onClick={()=> handleDeleteTask(taskId)}  id="button" ><img className="h-[26px] w-[26px]" src="/images/close.svg" alt="" /></button>               
                 <button onClick={handleOpenTaskEditor} id="button" ><img className="h-[26px] w-[26px]" src="/images/pencil-task.svg" alt="" /></button>

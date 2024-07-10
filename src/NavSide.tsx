@@ -9,7 +9,7 @@ const handleNavOpen = ()=>{
     setNavOpen(!navOpen)
 }
   return (
-    <nav className={`bg-white-tertiary h-full relative border-white-light border-[1px] w-[300px] px-2 pt-4 shadow-[5px_0px_10px_rgba(200,200,200,0.3)] duration-1000 ${navOpen?'':'translate-x-[calc(-300px+10px)]'}`}>
+    <nav className={`bg-white-tertiary h-full relative  border-white-light border-[1px] w-[300px] px-2 pt-4 shadow-[5px_0px_10px_rgba(200,200,200,0.3)] duration-1000 ${navOpen?'':'translate-x-[calc(-300px+10px)]'}`}>
       <div>
         <div className="flex justify-between">
           <div>
@@ -25,11 +25,14 @@ const handleNavOpen = ()=>{
             </button>
           </div>
         </div>
-        <div>
-          {titleTasks.map((item) => (
-            <TaskTitle key={item.id} id={item.id} titleTasks={titleTasks} />
+ 
+          <div >
+          {titleTasks.map(({id}) => (
+            <TaskTitle key={id} id={id} titleTasks={titleTasks} />
           ))}
-        </div>
+          </div>
+        
+
       </div>
       <div
       onClick={handleNavOpen}
@@ -37,8 +40,8 @@ const handleNavOpen = ()=>{
             z-10 absolute top-[calc(50%-60px)] right-[-25px] flex justify-center items-center rounded-full
             "
       >
-        <button>
-          <img className={` duration-1000 ${navOpen?'':'rotate-180'}`} src="/images/arrow-close.svg" alt="Arrow icon" />
+        <button className="z-50">
+          <img className={` duration-1000 z-50 ${navOpen?'':'rotate-180'}`} src="/images/arrow-close.svg" alt="Arrow icon" />
         </button>
       </div>
     </nav>

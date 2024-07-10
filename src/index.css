@@ -4,3 +4,16 @@
 body{
     background-color: #F5F7FA;
 }
+
+.task-container{
+    animation: view 1s ease-in-out 1;
+}
+
+@keyframes view{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

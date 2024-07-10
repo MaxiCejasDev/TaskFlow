@@ -2,7 +2,8 @@
 import { useParams } from "react-router-dom";
 import TasksBody from "./TasksBody/TasksBody";
 import { useTaskContext } from "./contexts/TaskProvider";
-import { useEffect,useRef,useState } from "react";
+import { useEffect,useState } from "react";
+import NotTasks from "./components/NotTasks";
 
 
 
@@ -88,8 +89,10 @@ export default function TaskContainer (){
     return(
         <>
             
-                <div className="w-[calc(100%-300px)] pl-16 pr-64 h-full pt-8">
-                <div className="w-full">
+            <div className="w-[calc(100%-300px)] pl-16 pr-64 h-full pt-8 task-container">
+                {titleTasks.length <= 0?<NotTasks/>:(
+                    <>
+                    <div className="w-full">
                     <div className="flex gap-x-4 items-center pl-2 py-2">
                         <img className="h-[24px] w-[24px]" src="/images/task.svg" alt="Task title" />
                     <p className="text-xl text-black-bold">{taskTitle}</p>
@@ -105,6 +108,10 @@ export default function TaskContainer (){
                     </div>
                 </div>
                 <TasksBody tasks={tasks} handleDeleteTask={handleDeleteTask} handleEditTask={handleEditTask}/>
+                    </>
+                )}
+                
+
             </div>
   
                      
