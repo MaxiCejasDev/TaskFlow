@@ -17,3 +17,23 @@ body{
         opacity: 1;
     }
 }
+.menu-bar-1{
+    transform: translateY(8px) scale(0);
+    transition-duration: 500ms;
+}
+.menu-bar-2{
+    background-color: transparent;
+    transition-duration: 700ms;
+}
+.menu-bar-3{
+    transform: translateY(-8px) scale(0);
+    transition-duration: 500ms;
+}
+.close-bar-1{
+    transform: rotate(-40deg);
+    transition-duration: 500ms;
+}
+.close-bar-2{
+    transform: rotate(40deg) translateY(1px) translateX(0px);
+    transition-duration: 500ms;
+}

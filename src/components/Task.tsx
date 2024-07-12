@@ -24,12 +24,12 @@ export default function Task({taskId,taskText,handleDeleteTask, handleEditTask}:
     setIsCompleted(!isCompleted)
    }
     return(
-        <div  className="flex w-full relative bg-white hover:bg-white-tertiary items-center gap-x-4 px-2">
+        <div  className="flex w-full justify-between sm:relative bg-white hover:bg-white-tertiary items-center gap-x-4 pt-4 sm:pt-0 sm:px-2">
             <input onClick={()=> {
                 handleCompletedTask()
             }} className="h-[20px] w-[20px]" type="checkbox" />
             <p className={`${isCompleted?'text-[#555555] line-through':''}`}>{taskText}</p>
-            <div className="flex gap-x-1 absolute right-0 top-0">
+            <div className="flex gap-x-1 sm:absolute right-0 top-0">
                 <button onClick={()=> handleDeleteTask(taskId)}  id="button" ><img className="h-[26px] w-[26px]" src="/images/close.svg" alt="" /></button>               
                 <button onClick={handleOpenTaskEditor} id="button" ><img className="h-[26px] w-[26px]" src="/images/pencil-task.svg" alt="" /></button>
             </div>

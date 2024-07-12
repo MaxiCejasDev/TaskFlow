@@ -15,13 +15,13 @@ interface TitleContent {
 }
 
 
-interface TaskTitle{
+interface Props{
   id: number;
   titleTasks: TitleContent[];
 
 }
 
-export default function TaskTitle({id,titleTasks}: TaskTitle) {
+export default function TaskTitle({id,titleTasks}: Props) {
   const {setTitleTasks} = useTaskContext()
   const [inputTitle, setInputTitle] = useState('')
   const [addTitle, setAddTitle] =  useState(false)
@@ -72,8 +72,8 @@ useEffect(()=>{
 
   return (
     
-      <NavLink to={`/${id}`} className="hover:bg-white-light relative  h-[40px] w-full rounded-[12px] font-semibold text-base text-black-bold flex px-2 items-center justify-between">
-        <div className="relative flex items-center gap-x-1">
+      <NavLink to={`/${id}`}  className="hover:bg-white-light relative  h-[40px] w-full rounded-[12px] font-semibold text-base text-black-bold flex px-2 items-center justify-between">
+        <div  className="relative flex items-center gap-x-1">
           <div className="h-[36px] w-[36px] rounded-full flex justify-center items-center">
             <img
               className="h-[16px] w-[16px]"
@@ -83,7 +83,7 @@ useEffect(()=>{
           </div>
         
         {
-          addTitle?<p className="task-title">{inputTitle}</p>:(
+          addTitle?<p>{inputTitle}</p>:(
             <>
             <div ref={inputTitleRef} className="absolute z-10 top-0 left-[50px] w-[250px] px-2 h-[40px] bg-white-secondary flex gap-x-2 justify-center items-center rounded-[4px] shadow-[0px_5px_10px_rgba(0,0,0,.25)] ">
               <input className="outline-white-light pl-2 bg-white outline-1 rounded-[4px] w-[200px] h-[30px]" onChange={handleInputTitle} type="text" />

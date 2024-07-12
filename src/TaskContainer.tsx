@@ -89,7 +89,7 @@ export default function TaskContainer (){
     return(
         <>
             
-            <div className="w-[calc(100%-300px)] pl-16 pr-64 h-full pt-8 task-container">
+            <div className="h-full sm:w-[calc(100%-300px)] sm:pl-16 sm:pr-64  sm:pt-8 task-container">
                 {titleTasks.length <= 0?<NotTasks/>:(
                     <>
                     <div className="w-full">

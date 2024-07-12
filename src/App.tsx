@@ -8,7 +8,7 @@ const NotTasks = lazy(()=> import('./components/NotTasks'))
 function App() {
 
   return (
-      <div className="h-screen w-full bg-white  flex overflow-hidden">
+      <div className="h-screen w-full bg-white  flex flex-col  sm:flex-row overflow-hidden">
 
           <NavSide/>
           <Suspense fallback={<Loader/>}>

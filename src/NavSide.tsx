@@ -4,14 +4,29 @@ import { useTaskContext } from "./contexts/TaskProvider";
 
 export default function NavSide() {
   const [navOpen, setNavOpen] = useState(true);
+  const [navMenu, setNavMenu] = useState(false)
   const { titleTasks, handleTitleTasks } = useTaskContext();
-const handleNavOpen = ()=>{
+  const handleNavOpen = ()=>{
     setNavOpen(!navOpen)
-}
+  }
+  const handleNavMenu = ()=>{
+    setNavMenu(!navMenu)
+  }
+
   return (
-    <nav className={`bg-white-tertiary h-full relative  border-white-light border-[1px] w-[300px] px-2 pt-4 shadow-[5px_0px_10px_rgba(200,200,200,0.3)] duration-1000 ${navOpen?'':'translate-x-[calc(-300px+10px)]'}`}>
-      <div>
-        <div className="flex justify-between">
+    <nav className={`bg-white-tertiary w-full h-[50px] border-b-1 border-white-light sm:h-full sm:relative  sm:border-white-light sm:border-[1px] sm:w-[300px] sm:px-2 sm:pt-4 sm:shadow-[5px_0px_10px_rgba(200,200,200,0.3)] duration-1000 ${navOpen?'':'translate-x-[calc(-300px+10px)]'}`}>
+      <div className="w-full h-full">
+          <div onClick={handleNavMenu} className="h-full w-[60px] flex flex-col justify-center items-center py-2 gap-y-1">
+            <div className={`h-[4px] w-[30px] bg-black ${navMenu?'menu-bar-1':'duration-500'}`}></div>
+            <div className={`h-[4px] w-[30px] bg-black relative ${navMenu?'menu-bar-2':'duration-500'}`}>
+              <div className={`h-[4px] w-[30px] bg-black duration-500 absolute top-0 ${navMenu?'close-bar-1':''}`}></div>
+              <div className={`h-[4px] w-[30px] bg-black duration-500 absolute top-0 ${navMenu?'close-bar-2':''}`}></div>
+            </div>
+            <div className={`h-[4px] w-[30px] bg-black ${navMenu?'menu-bar-3':'duration-500'}`}></div>
+          </div>
+      </div>
+      <div className={`h-screen w-full px-4 bg-white-tertiary pt-4 translate-x-[-110%] duration-500 ${navMenu?'translate-x-[0] duration-500':''}`}>
+        <div className="w-full flex justify-between">
           <div>
             <p className="font-semibold text-black-bold">Mis tareas</p>
           </div>
@@ -28,7 +43,7 @@ const handleNavOpen = ()=>{
  
           <div >
           {titleTasks.map(({id}) => (
-            <TaskTitle key={id} id={id} titleTasks={titleTasks} />
+            <TaskTitle key={id}  id={id} titleTasks={titleTasks} />
           ))}
           </div>
         
@@ -36,8 +51,8 @@ const handleNavOpen = ()=>{
       </div>
       <div
       onClick={handleNavOpen}
-        className="h-[60px] cursor-pointer w-[30px] border-[1px] border-neutral-400 bg-white-secondary hover:bg-white-tertiary shadow-[0px_5px_10px_rgba(0,0,0,0.07)] 
-            z-10 absolute top-[calc(50%-60px)] right-[-25px] flex justify-center items-center rounded-full
+        className="hidden h-[60px] cursor-pointer w-[30px] border-[1px] border-neutral-400 bg-white-secondary hover:bg-white-tertiary shadow-[0px_5px_10px_rgba(0,0,0,0.07)] 
+            z-10 absolute top-[calc(50%-60px)] right-[-25px] sm:flex justify-center items-center rounded-full
             "
       >
         <button className="z-50">
