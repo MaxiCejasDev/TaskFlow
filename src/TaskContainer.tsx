@@ -34,6 +34,7 @@ export default function TaskContainer (){
             id: tasks.length + 1,
             text: text
         }])
+        setInputValue('')
     }
     const handleDeleteTask = (id: number)=>{
         const updateTask = tasks.filter((task)=>{
@@ -101,7 +102,7 @@ export default function TaskContainer (){
                 </div>
                 <div className="w-full  pl-2 pb-2">  
                     <div className="flex pt-2 gap-x-4 w-full h-full">
-                        <input onChange={handleInputValue} className="w-3/4 border-2 outline-white-light pl-2 border-none" placeholder="Escribir tarea..." type="text" />
+                        <input onChange={handleInputValue} value={inputValue} className="w-3/4 border-2 outline-white-light pl-2 border-none" placeholder="Escribir tarea..." type="text" />
                         <button onClick={()=> handleAddTask(inputValue)}  className="bg-white-light flex items-center justify-center w-[32px] h-[32px] rounded-full">
                             <img className="h-[26px] w-[26px]" src="/images/arrow.svg" alt="" />
                         </button>

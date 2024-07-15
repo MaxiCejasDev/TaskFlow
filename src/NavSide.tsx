@@ -14,8 +14,8 @@ export default function NavSide() {
   }
 
   return (
-    <nav className={`bg-white-tertiary w-full h-[50px] border-b-1 border-white-light sm:h-full sm:relative  sm:border-white-light sm:border-[1px] sm:w-[300px] sm:px-2 sm:pt-4 sm:shadow-[5px_0px_10px_rgba(200,200,200,0.3)] duration-1000 ${navOpen?'':'translate-x-[calc(-300px+10px)]'}`}>
-      <div className="w-full h-full">
+    <nav className={`bg-white-tertiary w-full h-[50px] border-b-1 border-white-light sm:h-full sm:relative  sm:border-white-light sm:border-[1px] sm:w-[300px] sm:px-0 sm:pt-4 sm:shadow-[5px_0px_10px_rgba(200,200,200,0.3)] duration-1000 ${navOpen?'':'translate-x-[calc(-300px+10px)]'}`}>
+      <div className="w-full h-full sm:hidden">
           <div onClick={handleNavMenu} className="h-full w-[60px] flex flex-col justify-center items-center py-2 gap-y-1">
             <div className={`h-[4px] w-[30px] bg-black ${navMenu?'menu-bar-1':'duration-500'}`}></div>
             <div className={`h-[4px] w-[30px] bg-black relative ${navMenu?'menu-bar-2':'duration-500'}`}>
@@ -25,7 +25,7 @@ export default function NavSide() {
             <div className={`h-[4px] w-[30px] bg-black ${navMenu?'menu-bar-3':'duration-500'}`}></div>
           </div>
       </div>
-      <div className={`h-screen w-full px-4 bg-white-tertiary pt-4 translate-x-[-110%] duration-500 ${navMenu?'translate-x-[0] duration-500':''}`}>
+      <div className={`h-screen overflow-y-auto w-full px-4 bg-white-tertiary pt-4 translate-x-[-110%] sm:translate-x-0 duration-500 ${navMenu?'translate-x-[0] duration-500':''}`}>
         <div className="w-full flex justify-between">
           <div>
             <p className="font-semibold text-black-bold">Mis tareas</p>
@@ -40,8 +40,8 @@ export default function NavSide() {
             </button>
           </div>
         </div>
- 
-          <div >
+
+          <div className="sm:flex sm:flex-col gap-y-1">
           {titleTasks.map(({id}) => (
             <TaskTitle key={id}  id={id} titleTasks={titleTasks} />
           ))}
