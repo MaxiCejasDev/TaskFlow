@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTaskContext } from "../contexts/TaskProvider";
-import TaskTitleModal from "./TaskTitleModal";
+import {TaskTitleModal }from "./TaskTitleModal";
 
 interface Task{
   id: number,
@@ -22,13 +22,19 @@ interface Props{
 }
 
 export default function TaskTitle({id,titleTasks}: Props) {
-  const {setTitleTasks} = useTaskContext()
   const [inputTitle, setInputTitle] = useState('')
   const [addTitle, setAddTitle] =  useState(false)
   const [openTitleModal, setOpenTitleModal] = useState(false)
-  const inputTitleRef = useRef()
-  const editRef = useRef()
+
+  const inputTitleRef = useRef<HTMLDivElement | null>(null)
+  const editRef = useRef<HTMLButtonElement| null>(null)
   const editPosition = editRef.current ? editRef.current.getBoundingClientRect() : null
+  const context = useTaskContext();
+  if (!context) {
+      return null;
+  }
+  const {setTitleTasks} = context
+
 
   const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>)=>{
     setInputTitle(e.target.value)

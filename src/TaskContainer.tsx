@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import TasksBody from "./TasksBody/TasksBody";
 import { useTaskContext } from "./contexts/TaskProvider";
-import { ContextType, useEffect,useState } from "react";
+import { useEffect,useState } from "react";
 import NotTasks from "./components/NotTasks";
 
 
@@ -22,11 +22,15 @@ interface TaskContent {
 export default function TaskContainer (){
 
     const [inputValue, setInputValue] = useState('')
-    const { taskId } = useParams()
-    const {titleTasks , setTitleTasks} = useTaskContext()
+    const { taskId } = useParams<{taskId:string}>()
+    
     const [tasks, setTasks] = useState<Task[]>([])
     const [taskTitle, setTaskTitle] = useState<string>('')
-
+    const context = useTaskContext();
+    if (!context) {
+        return null;
+    }
+    const {titleTasks , setTitleTasks} = context
     const handleMatchTitle = (id:number | string)=>{
         titleTasks.map((item : TaskContent)=>{
             if(id === item.id){
@@ -82,14 +86,24 @@ export default function TaskContainer (){
 
     useEffect(()=>{ 
         setTasks([])
-        handleValidateTasks(taskId.toString())
+        if (taskId !== undefined){
+            handleValidateTasks(taskId.toString())
+        }
+        
     },[taskId])
 
     useEffect(()=>{
-        handleUpdateTaskTitle(parseInt(taskId.toString()),tasks)
+        if(taskId !== undefined){
+            handleUpdateTaskTitle(parseInt(taskId.toString()),tasks)
+        }
+        
     },[tasks])
+    
     useEffect(()=>{
-        handleMatchTitle(parseInt(taskId.toString()))
+        if(taskId !== undefined){
+            handleMatchTitle(parseInt(taskId.toString()))
+        }
+  
     },[titleTasks])
 
     

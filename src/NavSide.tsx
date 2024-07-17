@@ -5,7 +5,13 @@ import { useTaskContext } from "./contexts/TaskProvider";
 export default function NavSide() {
   const [navOpen, setNavOpen] = useState(true);
   const [navMenu, setNavMenu] = useState(false)
-  const { titleTasks, handleTitleTasks } = useTaskContext();
+  const context = useTaskContext();
+  if (!context) {
+      return null;
+  }
+  const {titleTasks , handleTitleTasks} = context
+
+  
   const handleNavOpen = ()=>{
     setNavOpen(!navOpen)
   }

@@ -1,7 +1,7 @@
 import { useEffect, useRef} from "react";
 
 interface Props {
-    editPosition: DOMRect;
+    editPosition: DOMRect | null;
     id: number;
     openTitleModal: boolean;
     handleOpenTitleModal: ()=> void;
@@ -9,8 +9,11 @@ interface Props {
     handleDeleteTitle: (value:number)=> void;
 }
 
-export default function TaskTitleModal({editPosition,id,openTitleModal,handleOpenTitleModal, handleAddTitle,handleDeleteTitle}:Props) {
+export const TaskTitleModal : React.FC<Props> = ({editPosition,id,openTitleModal,handleOpenTitleModal, handleAddTitle,handleDeleteTitle}:Props) =>{
   const modalRef = useRef<HTMLDivElement>(null)
+  if(!editPosition){
+    return null
+  }
   const topPosition = editPosition.top;
   useEffect(()=>{
     const handleClickOutside = (e: MouseEvent)=>{
