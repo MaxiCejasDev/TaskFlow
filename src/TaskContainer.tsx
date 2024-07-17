@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import TasksBody from "./TasksBody/TasksBody";
 import { useTaskContext } from "./contexts/TaskProvider";
-import { useEffect,useState } from "react";
+import { ContextType, useEffect,useState } from "react";
 import NotTasks from "./components/NotTasks";
 
 
@@ -12,6 +12,12 @@ interface Task {
     text: string
 }
 
+interface TaskContent {
+    id: number;
+    title: string;
+    tasks: Task[]
+
+}
 
 export default function TaskContainer (){
 
@@ -21,9 +27,9 @@ export default function TaskContainer (){
     const [tasks, setTasks] = useState<Task[]>([])
     const [taskTitle, setTaskTitle] = useState<string>('')
 
-    const handleMatchTitle = (id)=>{
-        titleTasks.map((item)=>{
-            if(parseInt(id) === item.id){
+    const handleMatchTitle = (id:number | string)=>{
+        titleTasks.map((item : TaskContent)=>{
+            if(id === item.id){
                 setTaskTitle(item.title)
             }
         })
@@ -51,12 +57,12 @@ export default function TaskContainer (){
         })
         setTasks(updateNewText)
     }
-    const handleInputValue = (e)=>{
+    const handleInputValue = (e:React.ChangeEvent<HTMLInputElement>)=>{
         setInputValue(e.target.value)
     }
    
     const handleUpdateTaskTitle = (id:number, tasks: Task[])=>{
-        const updateTitleTask = titleTasks.map((item)=>{
+        const updateTitleTask = titleTasks.map((item : TaskContent)=>{
             if(item.id === id){
                 return {...item, tasks: tasks}
             }
@@ -64,9 +70,9 @@ export default function TaskContainer (){
         })
         setTitleTasks(updateTitleTask)
     }
-    const handleValidateTasks = (id)=>{
-        titleTasks.map((item)=>{
-            if(item.id === parseInt(id) && item.tasks.length > 0){
+    const handleValidateTasks = (id : number | string)=>{
+        titleTasks.map((item : TaskContent)=>{
+            if(item.id === parseInt(id.toString()) && item.tasks.length > 0){
                     setTasks(item.tasks)
 
             }
@@ -76,21 +82,21 @@ export default function TaskContainer (){
 
     useEffect(()=>{ 
         setTasks([])
-        handleValidateTasks(taskId)
+        handleValidateTasks(taskId.toString())
     },[taskId])
 
     useEffect(()=>{
-        handleUpdateTaskTitle(parseInt(taskId),tasks)
+        handleUpdateTaskTitle(parseInt(taskId.toString()),tasks)
     },[tasks])
     useEffect(()=>{
-        handleMatchTitle(taskId)
+        handleMatchTitle(parseInt(taskId.toString()))
     },[titleTasks])
 
     
     return(
         <>
             
-            <div className="h-full sm:w-[calc(100%-300px)] sm:pl-16 sm:pr-64  sm:pt-8 task-container">
+            <div className="h-screen sm:w-[calc(100%-300px)] overflow-y-auto sm:pl-16 sm:pr-64 sm:pt-8 task-container">
                 {titleTasks.length <= 0?<NotTasks/>:(
                     <>
                     <div className="w-full">

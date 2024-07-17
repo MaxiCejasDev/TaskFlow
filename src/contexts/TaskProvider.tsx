@@ -14,9 +14,9 @@ interface TaskContent {
 
 
 interface ContextType{
-    titleTasks:TaskContent[];
+    titleTasks : TaskContent[];
     handleTitleTasks : ()=> void;
-   
+   setTitleTasks : React.Dispatch<React.SetStateAction<TaskContent[]>>
 }
 
 const TaskContext = createContext<ContextType | undefined>(undefined)

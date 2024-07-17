@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef} from "react";
 
 interface Props {
     editPosition: DOMRect;
@@ -10,11 +10,11 @@ interface Props {
 }
 
 export default function TaskTitleModal({editPosition,id,openTitleModal,handleOpenTitleModal, handleAddTitle,handleDeleteTitle}:Props) {
-  const modalRef = useRef()
+  const modalRef = useRef<HTMLDivElement>(null)
   const topPosition = editPosition.top;
   useEffect(()=>{
-    const handleClickOutside = (event)=>{
-      if(modalRef.current && !modalRef.current.contains(event.target)){
+    const handleClickOutside = (e: MouseEvent)=>{
+      if(modalRef.current && !modalRef.current.contains(e.target as Node)){
           handleOpenTitleModal()
       } 
       

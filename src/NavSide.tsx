@@ -12,6 +12,7 @@ export default function NavSide() {
   const handleNavMenu = ()=>{
     setNavMenu(!navMenu)
   }
+  console.log(titleTasks)
 
   return (
     <nav className={`bg-white-tertiary w-full h-[50px] border-b-1 border-white-light sm:h-full sm:relative  sm:border-white-light sm:border-[1px] sm:w-[300px] sm:px-0 sm:pt-4 sm:shadow-[5px_0px_10px_rgba(200,200,200,0.3)] duration-1000 ${navOpen?'':'translate-x-[calc(-300px+10px)]'}`}>
@@ -42,7 +43,7 @@ export default function NavSide() {
         </div>
 
           <div className="sm:flex sm:flex-col gap-y-1">
-          {titleTasks.map(({id}) => (
+          {titleTasks.map(({id}: {id:number}) => (
             <TaskTitle key={id}  id={id} titleTasks={titleTasks} />
           ))}
           </div>

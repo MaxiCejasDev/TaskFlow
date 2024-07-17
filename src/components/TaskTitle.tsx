@@ -30,7 +30,7 @@ export default function TaskTitle({id,titleTasks}: Props) {
   const editRef = useRef()
   const editPosition = editRef.current ? editRef.current.getBoundingClientRect() : null
 
-  const handleInputTitle = (e)=>{
+  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>)=>{
     setInputTitle(e.target.value)
   }
   const handleTitle = (taskId:number)=>{
@@ -58,8 +58,8 @@ export default function TaskTitle({id,titleTasks}: Props) {
   setTitleTasks(updateTitle)
 }
 useEffect(()=>{
-  const handleOutsideInputTitle = (event)=>{
-    if(inputTitleRef.current && !inputTitleRef.current.contains(event.target)){
+  const handleOutsideInputTitle = (event:MouseEvent)=>{
+    if(inputTitleRef.current && !inputTitleRef.current.contains(event.target as Node)){
       setAddTitle(!addTitle)
     }
   }

@@ -10,7 +10,7 @@ interface Props{
 
 export default function TaskEdit ({openTaskEditor, handleOpenTaskEditor,taskId,handleEditTask}: Props){
     const [inputNewValue, setInputNewValue] = useState('')
-    const handleNewText = (e)=>{
+    const handleNewText = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setInputNewValue(e.target.value)
     }
     
