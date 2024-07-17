@@ -49,7 +49,7 @@ export default function NavSide() {
         </div>
 
           <div className="sm:flex sm:flex-col gap-y-1">
-          {titleTasks.map(({id}: {id:number}) => (
+          {titleTasks.map(({id} : {id:number}) => (
             <TaskTitle key={id}  id={id} titleTasks={titleTasks} />
           ))}
           </div>

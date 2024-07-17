@@ -15,7 +15,7 @@ export default function TaskEdit ({openTaskEditor, handleOpenTaskEditor,taskId,h
     }
     
     return(
-        <div className={openTaskEditor?"fixed bg-[rgba(0,0,0,.5)] h-screen w-full top-0 left-0 z-100 flex justify-center items-center":"hidden"}>
+        <div role="dialog" className={openTaskEditor?"fixed bg-[rgba(0,0,0,.5)] h-screen w-full top-0 left-0 z-100 flex justify-center items-center":"hidden"}>
             <div className="bg-white h-1/4 w-1/4 flex justify-center items-center gap-x-2 rounded-[12px] relative">
                 <button onClick={handleOpenTaskEditor} className="absolute top-[5px] right-[5px]"><img src="/images/close.svg" alt="Close icon" /></button>
                 <input onChange={handleNewText} className="border-2 border-white-light py-2 px-2 rounded-[4px]" placeholder="Ingresar cambio" type="text" />

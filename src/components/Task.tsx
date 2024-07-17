@@ -33,8 +33,8 @@ export default function Task({taskId,taskText,handleDeleteTask, handleEditTask}:
             </div>
            
             <div className="flex gap-x-1 sm:absolute right-0 top-0">
-                <button onClick={()=> handleDeleteTask(taskId)}  id="button" ><img className="h-[26px] w-[26px]" src="/images/close.svg" alt="" /></button>               
-                <button onClick={handleOpenTaskEditor} id="button" ><img className="h-[26px] w-[26px]" src="/images/pencil-task.svg" alt="" /></button>
+                <button onClick={()=> handleDeleteTask(taskId)}  id="button" aria-label="delete"><img className="h-[26px] w-[26px]" src="/images/close.svg" alt="" /></button>               
+                <button onClick={handleOpenTaskEditor} id="button" aria-label="edit"><img className="h-[26px] w-[26px] editor-button" src="/images/pencil-task.svg" alt="" /></button>
             </div>
             
             {openTaskEditor && <TaskEdit openTaskEditor={openTaskEditor} handleOpenTaskEditor={handleOpenTaskEditor} taskId={taskId} handleEditTask={handleEditTask}/>}

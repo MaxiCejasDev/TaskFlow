@@ -3,7 +3,7 @@ import NavSide  from './NavSide'
 import { lazy, Suspense } from 'react'
 import Loader from './components/Loader'
 
-const TaskContainer = lazy(()=> import('./TaskContainer'))
+const TaskContainer = lazy(()=> import('./TaskContainer/TaskContainer'))
 const NotTasks = lazy(()=> import('./components/NotTasks'))
 function App() {
 

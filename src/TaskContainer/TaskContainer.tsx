@@ -1,9 +1,9 @@
 
 import { useParams } from "react-router-dom";
-import TasksBody from "./TasksBody/TasksBody";
-import { useTaskContext } from "./contexts/TaskProvider";
+import TasksBody from "../TasksBody/TasksBody";
+import { useTaskContext } from "../contexts/TaskProvider";
 import { useEffect,useState } from "react";
-import NotTasks from "./components/NotTasks";
+import NotTasks from "../components/NotTasks";
 
 
 

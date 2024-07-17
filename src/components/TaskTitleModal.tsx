@@ -31,7 +31,7 @@ export const TaskTitleModal : React.FC<Props> = ({editPosition,id,openTitleModal
   },[openTitleModal])
  
   return (
-    <div ref={modalRef} className={`fixed top-[${topPosition}px] left-[calc(100%-160px)] sm:left-[122px] w-[150px] h-[100px] bg-white z-[1000] flex flex-col shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-[12px] overflow-hidden`}>
+    <div role="dialog" ref={modalRef} className={`fixed top-[${topPosition}px] left-[calc(100%-160px)] sm:left-[122px] w-[150px] h-[100px] bg-white z-[1000] flex flex-col shadow-[0px_4px_10px_rgba(0,0,0,0.25)] rounded-[12px] overflow-hidden`}>
       <li onClick={()=>{
         handleDeleteTitle(id)
         handleOpenTitleModal()

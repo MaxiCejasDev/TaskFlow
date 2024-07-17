@@ -107,7 +107,7 @@ useEffect(()=>{
         
         </div>
         {addTitle ? ((<div>
-          <button ref={editRef} onClick={handleOpenTitleModal}>
+          <button aria-label="titleEditor" ref={editRef} onClick={handleOpenTitleModal}>
             <img
               className="h-[24px] w-[24px]"
               src="/images/point-menu.svg"
