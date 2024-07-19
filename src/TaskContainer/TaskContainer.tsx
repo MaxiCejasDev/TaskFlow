@@ -110,17 +110,17 @@ export default function TaskContainer (){
     return(
         <>
             
-            <div className="h-screen sm:w-[calc(100%-300px)] overflow-y-auto sm:pl-16 sm:pr-64 sm:pt-8 task-container">
+            <div className="h-screen sm:w-[calc(100%-300px)] overflow-y-auto px-2 sm:pl-16 sm:pr-64 sm:pt-8 task-container">
                 {titleTasks.length <= 0?<NotTasks/>:(
                     <>
                     <div className="w-full">
-                    <div className="flex gap-x-4 items-center pl-2 py-2">
+                    <div className="flex gap-x-2 sm:gap-x-4 items-center pl-2 py-2">
                         <img className="h-[24px] w-[24px]" src="/images/task.svg" alt="Task title" />
                     <p className="text-xl text-black-bold">{taskTitle}</p>
                     </div>
     
                 </div>
-                <div className="w-full  pl-2 pb-2">  
+                <div className="w-full pb-2 pl-2">  
                     <div className="flex pt-2 gap-x-4 w-full h-full">
                         <input onChange={handleInputValue} value={inputValue} className="w-3/4 border-2 outline-white-light pl-2 border-none" placeholder="Escribir tarea..." type="text" />
                         <button onClick={()=> handleAddTask(inputValue)}  className="bg-white-light flex items-center justify-center w-[32px] h-[32px] rounded-full">
