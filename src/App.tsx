@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import NavSide  from './NavSide'
 import { lazy, Suspense } from 'react'
 import Loader from './components/Loader'
+import Login from './components/Login'
 
 const TaskContainer = lazy(()=> import('./TaskContainer/TaskContainer'))
 const NotTasks = lazy(()=> import('./components/NotTasks'))
@@ -13,7 +14,7 @@ function App() {
           <NavSide/>
           <Suspense fallback={<Loader/>}>
           <Routes>
-            
+            <Route path="/login" element={<Login/>}/>
             <Route path="/" element={<NotTasks/>}/>
             <Route path="/:taskId" element={<TaskContainer/>}/>
             
